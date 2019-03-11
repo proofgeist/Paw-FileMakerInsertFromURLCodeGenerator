@@ -1,0 +1,39 @@
+{{#request.name}}/* ## {{{request.name}}} - cURL Options For Request - Set As Variable*/
+{{/request.name}}"curl {{#request_is_head}}--head {{/request_is_head}}{{#specify_method}}-X {{{request.method}}} {{/specify_method}} --trace-ascii $trace --dump-header $header \
+     {{#headers.has_headers}}
+     {{#headers.header_list}}
+     -H \"{{{header_name}}}: {{{header_value}}}\" \
+     {{/headers.header_list}}
+     {{/headers.has_headers}}
+     {{#headers.auth}}
+     -u \"{{{headers.auth.username}}}:{{{headers.auth.password}}}\" {{#headers.auth.isDigest}}--digest{{/headers.auth.isDigest}} \
+     {{/headers.auth}}
+     {{! ----- }}
+     {{#body.has_url_encoded_body}}
+     {{#body.url_encoded_body}}
+     --data-urlencode \"{{{name}}}=" & {{{value}}} & "\" \
+     {{/body.url_encoded_body}}
+     {{/body.has_url_encoded_body}}
+     {{! ----- }}
+     {{#body.has_raw_body_with_tabs_or_new_lines}}
+     -d ${{{body.raw_body}}} \
+     {{/body.has_raw_body_with_tabs_or_new_lines}}
+     {{! ----- }}
+     {{#body.has_raw_body_without_tabs_or_new_lines}}
+     -d \"{{{body.raw_body}}}\" \
+     {{/body.has_raw_body_without_tabs_or_new_lines}}
+     {{! ----- }}
+     {{#body.has_long_body}}
+     -d \"{set your body string}\" \
+     {{/body.has_long_body}}
+     {{! ----- }}
+     {{#body.has_multipart_body}}
+     {{#body.multipart_body}}
+     -F \"{{{name}}}=" & {{{value}}} & "\" \
+     {{/body.multipart_body}}
+     {{/body.has_multipart_body}}"
+
+     /* ## URL For Request Below - Any Variables in The URL Will Need To Be Substituted - Set As Variable */
+{{#url}}{{{url}}}{{/url}}{{#params.has_query_parameters}}{{#params.query_parameters}}{{{params.query_parameters}}}{{/params.query_parameters}}{{/params.has_query_parameters}}
+
+     {{! ----- }}
