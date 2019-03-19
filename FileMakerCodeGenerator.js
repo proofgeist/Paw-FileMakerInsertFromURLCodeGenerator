@@ -39,10 +39,16 @@
           results = [];
           for (header_name in headers) {
             header_value = headers[header_name];
+            if( header_name === 'Authorization' || header_value.indexOf('Bearer') >= 0 ){
             results.push({
               "header_name": addslashes_single_quotes(header_name),
-              "header_value": addslashes_single_quotes(header_value)
-            });
+              "header_value": addslashes_single_quotes( 'Bearer ' + "\" & $access_token & \"" )
+            }) } else {
+              results.push({
+                "header_name": addslashes_single_quotes(header_name),
+                "header_value": addslashes_single_quotes(header_value)
+              })
+            };
           }
           return results;
         })(),
@@ -66,8 +72,8 @@
         }
         userpass = decoded.match(/([^:]*):?(.*)/);
         return {
-          "username": addslashes_single_quotes(userpass[1] || ''),
-          "password": addslashes_single_quotes(userpass[2] || '')
+          "username": addslashes_single_quotes( "\" & $username & \""  || ''),
+          "password": addslashes_single_quotes( "\" & $password & \"" || '')
         };
       }
       digestDS = request.getHeaderByName('Authorization', true);
@@ -170,8 +176,8 @@
           for ( i in fragments ) {
             var keyvalue = fragments[i].split('=')
             name = keyvalue[0];
-            if ( i === 1 ) {
-            results.push( '?' + keyvalue[0] + '=" & ' + '$' + keyvalue[0] );
+            if ( parseInt(i) === 0 ) {
+            results.push( keyvalue[0] + '=" & ' + '$' + keyvalue[0] );
             } else {
             results.push( '&' +  keyvalue[0] + '=" & ' + '$' + keyvalue[0] );
             }
@@ -185,7 +191,7 @@
       baseURL = request.urlBase;
       params = request.urlQuery;
       if( params.length === 0 ){
-          return '"' + baseURL + '"';
+          return '"' + baseURL + '"' ;
       }else{
           return '"' + baseURL + '?' ;
       };   
@@ -251,37 +257,3 @@
 
 }).call(this);
 
-
-
-
-
-
-
-/*
-
-THIS FUNCTION IS BACKUP IN EVENT OTHER ONE BREAKS.
-
-  this.url = function(request) {
-      var baseURL, queryParams;
-      baseURL = request.urlBase;
-      queryParams = request.urlQuery;
-      var fragments = queryParams.split('&');
-      return {
-        "has_query_parameters": true,
-        "query_parameters": (function() {
-          var results;
-          results = [];
-          for ( i in fragments) {
-            var keyvalue = fragments[i].split('=')
-            name = keyvalue[0];
-            results.push({
-              "name": addslashes(name),
-              "value": addslashes( '$' + name )
-            });
-          }
-          return results;
-        })()
-      };  
-    };
-
-*/    
