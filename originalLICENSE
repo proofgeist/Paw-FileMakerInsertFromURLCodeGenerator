@@ -1,8 +1,6 @@
 The MIT License (MIT)
 
-Copyright (c) 2019 Proof Group LLC.
-
-FileMaker.mustache and FileMakerCodeGenerator.js are modifications from the Paw Extensions - cURL Code Generator. Other files are originals from the Paw Library. All files were Copyright (c) 2014 Paw Inc. These classes are licensed under the MIT license. See originalLICENSE for additional details. Their library can be found at https://paw.cloud/extensions/cURLCodeGenerator.
+Copyright (c) 2014 Paw Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
