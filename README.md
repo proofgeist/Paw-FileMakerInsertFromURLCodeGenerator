@@ -17,4 +17,4 @@ Install the extension from Paw (our favorite API tool here in the proof Kitchen)
 Big props to Brian for doing the heavy lifting :). 
 
 ## Copyright & Licensing
-This is an open source project brought to you from the proof dev kitchen. Help us make it better. 
+This is an open source project (MIT License) brought to you by the proof dev Kitchen. Help us make it better.
