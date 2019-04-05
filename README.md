@@ -4,7 +4,7 @@
 Code generator for `Insert from URL[...]` script step. 
 
 ## Why
-So that you can build cURL expressions without tearing your hair out.
+The make the business of creating API calls from FileMaker a joyfully simple affair.
 
 # How
 
