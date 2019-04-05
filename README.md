@@ -10,7 +10,7 @@ The make the business of creating API calls from FileMaker a joyfully simple aff
 
 - Install the extension from Paw (our favorite API tool here in the proof Kitchen). Look for 'FileMaker Code Generator' or the extension id, `com.proofgroup.PawExtensions.FileMakerCodeGenerator`
 - Create your API request in Paw. Test it. `FileMaker Code Generator` will generate a section of code for the `Insert from URL` script step and a separate snippet for the URL of your request.
-- Make sure you have the necessary variables referenced by the generated code block.
+- Make sure the variables that are referenced by the generated code block are in your FileMaker script.
 - You might also want to set a variable such as `$url` to store the url string snippet from the code generator. 
 - Then, simply copy the `curl -X...` block from Paw to your `Insert from URL` step in FileMaker 
 
