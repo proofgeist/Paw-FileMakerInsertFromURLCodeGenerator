@@ -1,12 +1,12 @@
 # Paw-FileMakerInsertFromURLCodeGenerator
 
-## What?
+## What
 Code generator for `Insert from URL[...]` script step. 
 
 ## Why
 The make the business of creating API calls from FileMaker a joyfully simple affair.
 
-# How
+## How
 
 - Install the extension from Paw (our favorite API tool here in the proof Kitchen). Look for 'FileMaker Code Generator' or the extension id, `com.proofgroup.PawExtensions.FileMakerCodeGenerator`
 - Create your API request in Paw. Test it. `FileMaker Code Generator` will generate a section of code for the `Insert from URL` script step and a separate snippet for the URL of your request.
