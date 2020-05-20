@@ -16,11 +16,11 @@
      {{/body.has_url_encoded_body}}
      {{! ----- }}
      {{#body.has_raw_body_with_tabs_or_new_lines}}
-     -d {{{body.raw_body}}} \
+     -d " & {{{body.raw_body}}} & " \
      {{/body.has_raw_body_with_tabs_or_new_lines}}
      {{! ----- }}
      {{#body.has_raw_body_without_tabs_or_new_lines}}
-     -d \"{{{body.raw_body}}}\" \
+     -d & \"{{{body.raw_body}}}\" \
      {{/body.has_raw_body_without_tabs_or_new_lines}}
      {{! ----- }}
      {{#body.has_long_body}}
@@ -33,7 +33,7 @@
      {{/body.multipart_body}}
      {{/body.has_multipart_body}}"
 
-     /* ## URL For Request Below - Any Variables in The URL Will Need To Be Substituted - Set As Variable */
+/* ## URL For Request Below - Any Variables in The URL Will Need To Be Substituted - Set As Variable */
 {{#url}}{{{url}}}{{/url}}{{#params.has_query_parameters}}{{#params.query_parameters}}{{{params.query_parameters}}}{{/params.query_parameters}}{{/params.has_query_parameters}}
 
      {{! ----- }}
