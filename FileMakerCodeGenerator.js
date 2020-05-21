@@ -192,32 +192,45 @@
         }
       }
     };
-    this.fmFunction = function (request) {      
+    this.fmFunction = function (request) {
       var body = request.body;
-      var obj = JSON.parse(body);
-      var result = getKeys(obj);
+      var json_body = request.jsonBody;
 
-      const array_mapper = (v, i, arr) => {
-        if (i > 0) {
-          return v.match(/^\d+$/)
-            ? "[" + v + "]"
-            : "." + v;
+      if (json_body != null) {
+        var obj = JSON.parse(body);
+        var result = getKeys(obj);
+
+        const array_mapper = (v, i, arr) => {
+          if (i > 0) {
+            return v.match(/^\d+$/)
+              ? "[" + v + "]"
+              : "." + v;
+          }
+          return v
         }
-        return v
+
+        var fmMap;
+        fmMap = result.map(a => Array.isArray(a) ? a.map(array_mapper).join("") : a);
+
+        var fmFX;
+        var fmFX = buildFM(fmMap);
+        var jse = 'JSONSetElement ( “{}” ; ' + fmFX + ')';
+
+        return {
+
+          "fmVar": jse
+
+        };
+
+      } else {
+
+        return {
+
+          "fmVar": 'Not JSON'
+
+        }
+
       }
-
-      var fmMap;
-      fmMap = result.map(a => Array.isArray(a) ? a.map(array_mapper).join("") : a);
-
-      var fmFX;
-      var fmFX = buildFM(fmMap);
-      var jse = 'JSONSetElement ( “{}” ; ' + fmFX + ')';
-
-      return {
-        
-        "fmVar": jse
-  
-      };
 
     };
     this.params = function (request) {
@@ -272,7 +285,8 @@
               if (i < components.length - 1) {
                 urlPattern += '" & $' + envVariable.name + ' & "'
               } else {
-                urlPattern += '" & $' + envVariable.name + ''
+                urlPattern += '" & $' + envVariable.name + '';
+                var lastDynVar = '$' + envVariable.name 
               }
             }
             else {
@@ -287,7 +301,11 @@
       }
       params = request.urlQuery;
       if (params.length === 0) {
-        return '"' + urlPattern + '';
+        if (urlPattern.endsWith(lastDynVar)){
+          return '"' + urlPattern + '';
+        } else {
+        return '"' + urlPattern + '"';
+        }
       } else {
         return '"' + urlPattern + ' & "?';
       };
@@ -347,4 +365,3 @@
   registerCodeGenerator(FileMakerCodeGenerator);
 
 }).call(this);
-
