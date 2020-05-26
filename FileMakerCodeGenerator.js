@@ -205,6 +205,12 @@
             return v.match(/^\d+$/)
               ? "[" + v + "]"
               : "." + v;
+          } else {
+            if (Array.isArray) {
+              return v.match(/^\d+$/)
+                ? "[" + v + "]"
+                : v;
+            }
           }
           return v
         }
@@ -286,7 +292,7 @@
                 urlPattern += '" & $' + envVariable.name + ' & "'
               } else {
                 urlPattern += '" & $' + envVariable.name + '';
-                var lastDynVar = '$' + envVariable.name 
+                var lastDynVar = '$' + envVariable.name
               }
             }
             else {
@@ -301,10 +307,10 @@
       }
       params = request.urlQuery;
       if (params.length === 0) {
-        if (urlPattern.endsWith(lastDynVar)){
+        if (urlPattern.endsWith(lastDynVar)) {
           return '"' + urlPattern + '';
         } else {
-        return '"' + urlPattern + '"';
+          return '"' + urlPattern + '"';
         }
       } else {
         return '"' + urlPattern + ' & "?';
