@@ -173,7 +173,7 @@
         return {
           "has_raw_body_with_tabs_or_new_lines": true,
           "has_raw_body_without_tabs_or_new_lines": false,
-          "raw_body": "$json" //addslashes_single_quotes(JSON.stringify(json_body, null, 2))
+          "raw_body": "Quote ( $json )" //addslashes_single_quotes(JSON.stringify(json_body, null, 2))
         };
       }
       raw_body = request.body;
